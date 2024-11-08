@@ -9,7 +9,7 @@ export default class Camera {
   controls: OrbitControls | undefined;
   constructor() {
     this.app = new App();
-    this.canvas = this.app.canvas;
+    this.canvas = this.app.canvas!;
     this.setInstance();
     this.setControls();
   }
@@ -27,5 +27,9 @@ export default class Camera {
   setControls() {
     this.controls = new OrbitControls(this.instance!, this.canvas);
     this.controls.enableDamping = true;
+  }
+
+  loop() {
+    this.controls?.update();
   }
 }
