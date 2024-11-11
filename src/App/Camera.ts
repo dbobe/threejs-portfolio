@@ -15,7 +15,6 @@ export default class Camera {
     this.canvas = this.app.canvas!;
     this.sizesStore = sizesStore;
     this.sizes = this.sizesStore.getState();
-    console.log(this.sizes);
     this.setInstance();
     this.setControls();
     this.setResizeListener();

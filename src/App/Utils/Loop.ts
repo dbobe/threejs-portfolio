@@ -12,7 +12,6 @@ export default class Loop {
     this.camera = this.app.camera!;
     this.renderer = this.app.renderer!;
     this.world = this.app.world!;
-    console.log(this.world);
 
     this.loop();
   }
