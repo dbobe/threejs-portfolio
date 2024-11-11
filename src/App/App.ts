@@ -32,7 +32,7 @@ export default class App {
 
     // Asset Loader
     this.assetLoader = new AssetLoader();
-    this.preloader = new Preloader();
+    // this.preloader = new Preloader();
 
     // world element
     this.world = new World();

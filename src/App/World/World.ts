@@ -1,28 +1,28 @@
 import * as THREE from "three";
+
 import App from "../App";
+import Physics from "./Physics";
+import Environment from "./Environment";
 
 export default class World {
   app: App;
   scene: THREE.Scene;
   cubeMesh: THREE.Mesh | undefined;
+  physics: Physics;
+  environment: Environment;
 
   constructor() {
     this.app = new App();
     this.scene = this.app.scene!;
 
-    this.setCube();
+    // create world classes
+    this.physics = new Physics();
+    this.environment = new Environment();
+
+    // this.loop();
   }
 
-  setCube() {
-    this.cubeMesh = new THREE.Mesh(
-      new THREE.BoxGeometry(1, 1, 1),
-      new THREE.MeshBasicMaterial({ color: 0xff0000 })
-    );
-    this.scene.add(this.cubeMesh);
-  }
-  loop() {
-    if (this.cubeMesh) {
-      this.cubeMesh.rotation.y += 0.01;
-    }
+  loop(deltaTime: number, elapsedTime: number) {
+    this.physics.loop();
   }
 }
