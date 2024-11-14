@@ -6,12 +6,8 @@ export default class Environment {
   app: App;
   scene: THREE.Scene | undefined;
   directionalLight: THREE.DirectionalLight | undefined;
-  cubeMesh:
-    | THREE.Mesh<THREE.BoxGeometry, THREE.MeshStandardMaterial>
-    | undefined;
-  cubeMesh2:
-    | THREE.Mesh<THREE.BoxGeometry, THREE.MeshStandardMaterial>
-    | undefined;
+  cubeMesh: THREE.Mesh | undefined;
+  cubeMesh2: THREE.Mesh | undefined;
   physics: Physics | undefined;
 
   constructor() {
@@ -37,22 +33,23 @@ export default class Environment {
     const group = new THREE.Group();
     group.position.y = 10;
     this.scene?.add(group);
-    const geometry = new THREE.BoxGeometry(4, 4, 1);
+    const geometry = new THREE.TorusKnotGeometry(1, 0.3, 30, 16);
     const material = new THREE.MeshStandardMaterial({ color: "blue" });
     this.cubeMesh = new THREE.Mesh(geometry, material);
     this.cubeMesh.position.y = 10;
     this.cubeMesh.rotation.x = 0.5;
     this.cubeMesh.rotation.z = 0.5;
+    this.cubeMesh.scale.set(1, 2, 3);
     group.add(this.cubeMesh);
-    this.physics?.add(this.cubeMesh, "dynamic");
+    this.physics?.add(this.cubeMesh, "dynamic", "trimesh");
 
     this.cubeMesh2 = new THREE.Mesh(geometry, material);
     this.cubeMesh2.position.y = 10;
-    this.cubeMesh2.position.x = 3;
+    this.cubeMesh2.position.x = 5;
     this.cubeMesh2.rotation.x = 0.5;
     this.cubeMesh2.rotation.z = 0.5;
     group.add(this.cubeMesh2);
-    this.physics?.add(this.cubeMesh2, "dynamic");
+    this.physics?.add(this.cubeMesh2, "dynamic", "trimesh");
 
     const groundGeometry = new THREE.BoxGeometry(20, 1, 20);
     const groundMaterial = new THREE.MeshStandardMaterial({
@@ -60,6 +57,6 @@ export default class Environment {
     });
     const groundMesh = new THREE.Mesh(groundGeometry, groundMaterial);
     this.scene?.add(groundMesh);
-    this.physics?.add(groundMesh, "fixed");
+    this.physics?.add(groundMesh, "fixed", "cuboid");
   }
 }
