@@ -1,7 +1,8 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
-import App from "./App";
 import { sizesStore } from "./Utils/Store";
+
+import App from "./App";
 
 export default class Camera {
   instance: THREE.PerspectiveCamera | undefined;
@@ -10,11 +11,15 @@ export default class Camera {
   controls: OrbitControls | undefined;
   sizes: { width: number; height: number; pixelRatio: number };
   sizesStore: any;
+
   constructor() {
     this.app = new App();
     this.canvas = this.app.canvas!;
+
     this.sizesStore = sizesStore;
+
     this.sizes = this.sizesStore.getState();
+
     this.setInstance();
     this.setControls();
     this.setResizeListener();
@@ -25,7 +30,7 @@ export default class Camera {
       35,
       this.sizes.width / this.sizes.height,
       0.1,
-      400
+      600
     );
     this.instance.position.z = 100;
     this.instance.position.y = 20;

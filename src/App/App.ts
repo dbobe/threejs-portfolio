@@ -6,6 +6,7 @@ import World from "./World/World";
 import Resize from "./Utils/Resize";
 import AssetLoader from "./Utils/AssetLoader";
 import Preloader from "./UI/Preloader";
+import InputController from "./UI/InputController";
 
 let instance: App | null = null;
 
@@ -19,6 +20,7 @@ export default class App {
   resize: Resize | undefined;
   assetLoader: AssetLoader | undefined;
   preloader: Preloader | undefined;
+  inputController: InputController | undefined;
 
   constructor() {
     if (instance) {
@@ -32,7 +34,10 @@ export default class App {
 
     // Asset Loader
     this.assetLoader = new AssetLoader();
-    // this.preloader = new Preloader();
+
+    // UI elements
+    this.preloader = new Preloader();
+    this.inputController = new InputController();
 
     // world element
     this.world = new World();

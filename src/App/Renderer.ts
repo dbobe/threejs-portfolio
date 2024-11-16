@@ -18,9 +18,11 @@ export default class Renderer {
     this.camera = this.app.camera!;
     this.sizesStore = sizesStore;
     this.sizes = this.sizesStore.getState();
+
     this.setInstance();
     this.setResizeListener();
   }
+
   setInstance() {
     this.instance = new THREE.WebGLRenderer({
       canvas: this.canvas,
@@ -29,13 +31,15 @@ export default class Renderer {
     this.instance.setSize(this.sizes.width, this.sizes.height);
     this.instance.setPixelRatio(this.sizes.pixelRatio);
   }
-  loop() {
-    this.instance?.render(this.scene!, this.camera!.instance!);
-  }
+
   setResizeListener() {
     this.sizesStore.subscribe((sizes: any) => {
       this.instance!.setSize(sizes.width, sizes.height);
       this.instance!.setPixelRatio(sizes.pixelRatio);
     });
+  }
+
+  loop() {
+    this.instance?.render(this.scene!, this.camera!.instance!);
   }
 }

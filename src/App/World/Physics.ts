@@ -73,6 +73,7 @@ export default class Physics {
     this.rigidBody?.setRotation(worldRotation, true);
 
     this.meshMap.set(mesh, this.rigidBody);
+    return this.rigidBody;
   }
 
   computeCuboidDimensions(mesh: THREE.Mesh) {

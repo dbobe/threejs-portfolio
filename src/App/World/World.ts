@@ -4,6 +4,7 @@ import App from "../App";
 import Physics from "./Physics";
 import Environment from "./Environment";
 import { appStateStore } from "../Utils/Store";
+import Character from "./Character";
 
 export default class World {
   app: App;
@@ -11,7 +12,7 @@ export default class World {
   cubeMesh: THREE.Mesh | undefined;
   physics: Physics;
   environment: Environment | undefined;
-
+  character: Character | undefined;
   constructor() {
     this.app = new App();
     this.scene = this.app.scene!;
@@ -21,6 +22,7 @@ export default class World {
     appStateStore.subscribe((state) => {
       if (state.physicsReady) {
         this.environment = new Environment();
+        this.character = new Character();
       }
     });
 
@@ -29,5 +31,6 @@ export default class World {
 
   loop() {
     this.physics.loop();
+    this.character?.loop();
   }
 }
